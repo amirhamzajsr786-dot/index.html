@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mega Earn Pro - Dashboard v10.0</title>
+    <title>Mega Earn Pro - Fixed Dashboard</title>
     
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -17,37 +17,144 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: white; overflow-x: hidden; padding-bottom: 90px; }
 
-        /* Timer Bar (15s Refresh) */
         .timer-bar { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, var(--p), var(--s)); width: 100%; z-index: 3000; animation: timer 15s linear infinite; }
         @keyframes timer { from {width: 100%;} to {width: 0%;} }
 
-        /* Header with Clock */
-        header { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(20px); padding: 10px 5%; display: flex; flex-direction: column; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 1000; }
-        .header-top { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 5px; }
-        .logo { font-weight: 900; font-size: 18px; color: var(--p); letter-spacing: -1px; }
-        
-        /* Digital Clock Style */
-        .clock-container { display: flex; flex-direction: column; align-items: center; background: rgba(0,0,0,0.3); padding: 5px 15px; border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.2); }
-        #digital-clock { font-size: 16px; font-weight: 900; color: var(--gold); font-family: 'monospace'; }
-        #live-date { font-size: 10px; color: #94a3b8; font-weight: bold; }
+        header { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(20px); padding: 10px 5%; border-bottom: 1px solid #334155; position: sticky; top: 0; z-index: 1000; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-weight: 900; font-size: 18px; color: var(--p); }
+        .clock-container { display: flex; flex-direction: column; align-items: center; background: rgba(0,0,0,0.3); padding: 5px 15px; border-radius: 12px; }
+        #digital-clock { font-size: 16px; font-weight: 900; color: var(--gold); }
+        #live-date { font-size: 10px; color: #94a3b8; }
+        .balance-chip { background: linear-gradient(135deg, var(--p), var(--s)); padding: 5px 12px; border-radius: 50px; font-weight: 900; font-size: 14px; }
 
-        .balance-chip { background: linear-gradient(135deg, var(--p), var(--s)); padding: 5px 12px; border-radius: 50px; font-weight: 900; font-size: 14px; box-shadow: 0 0 10px rgba(56, 189, 248, 0.3); }
-
-        /* VPN Info */
         #vpn-info { background: #ef4444; font-size: 11px; padding: 5px; text-align: center; font-weight: bold; width: 100%; border-radius: 5px; margin-top: 5px; }
 
         .main-content { max-width: 600px; margin: 15px auto; padding: 0 15px; }
-
-        /* Card System */
-        .card { background: var(--card); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 25px; backdrop-filter: blur(10px); margin-bottom: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .card { background: var(--card); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 25px; backdrop-filter: blur(10px); margin-bottom: 20px; text-align: center; }
         
-        /* Casino Slots */
         .slots { display: flex; justify-content: center; gap: 10px; margin: 20px 0; font-size: 40px; background: #000; padding: 20px; border-radius: 20px; border: 2px solid var(--p); }
-        
-        .btn { background: linear-gradient(135deg, var(--p), #0ea5e9); color: white; border: none; width: 100%; padding: 18px; border-radius: 16px; font-size: 18px; font-weight: 800; cursor: pointer; transition: 0.3s; }
-        .btn:active { transform: scale(0.95); }
+        .btn { background: linear-gradient(135deg, var(--p), #0ea5e9); color: white; border: none; width: 100%; padding: 18px; border-radius: 16px; font-size: 18px; font-weight: 800; cursor: pointer; }
 
-        /* Bottom Navigation Menu */
         .bottom-nav { position: fixed; bottom: 15px; left: 50%; transform: translateX(-50%); width: 92%; max-width: 420px; background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(20px); height: 70px; border-radius: 25px; display: flex; justify-content: space-around; align-items: center; border: 1px solid rgba(255,255,255,0.1); z-index: 2000; box-shadow: 0 20px 50px rgba(0,0,0,0.8); }
-        .nav-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; color: #94a3b8; transition: 0.3s; font-size: 20px; }
-        .nav-item span { font-size: 10
+        .nav-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; color: #94a3b8; }
+        .nav-item span { font-size: 10px; font-weight: bold; margin-top: 4px; }
+        .nav-active { color: var(--p) !important; transform: translateY(-5px); }
+
+        .list-link { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 15px; margin-top: 10px; display: flex; align-items: center; gap: 15px; text-decoration: none; color: white; border: 1px solid rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body onclick="handlePop()">
+
+<div class="timer-bar"></div>
+
+<header>
+    <div class="header-top">
+        <div class="logo">AMIR <span style="color: var(--s);">HAMZA</span></div>
+        <div class="clock-container">
+            <div id="digital-clock">00:00:00</div>
+            <div id="live-date">...</div>
+        </div>
+        <div class="balance-chip">$ <span id="balance">0.00</span></div>
+    </div>
+    <div id="vpn-info">CONNECTING...</div>
+</header>
+
+<div class="main-content">
+    <div id="view-task" class="view">
+        <div class="card">
+            <h2>LUCKY CASINO</h2>
+            <div class="slots">
+                <div id="s1">🎰</div><div id="s2">🎰</div><div id="s3">🎰</div>
+            </div>
+            <button class="btn" onclick="spinCasino()">SPIN & EARN</button>
+        </div>
+        <div id="container-faeeda3c47e0ef1ff97069c4db938d36"></div>
+        <script async="async" data-cfasync="false" src="https://pl28710350.effectivegatecpm.com/faeeda3c47e0ef1ff97069c4db938d36/invoke.js"></script>
+    </div>
+
+    <div id="view-offers" class="view" style="display: none;">
+        <div class="card">
+            <h2>EXCLUSIVE OFFERS</h2>
+            <button class="btn" style="background: var(--gold); color: black; margin-bottom: 12px;" onclick="window.open('https://viiukuhe.com/dc/?blockID=418817')">HOT OFFER #1</button>
+            <button class="btn" style="background: #22c55e;" onclick="window.open('https://viiukuhe.com/dc/?blockID=418817')">PREMIUM OFFER #2</button>
+        </div>
+    </div>
+
+    <div id="view-wallet" class="view" style="display: none;">
+        <div class="card">
+            <h2>MY WALLET</h2>
+            <input type="text" placeholder="Wallet Address" style="width: 100%; padding: 15px; border-radius: 12px; background: #000; color: white; margin-bottom: 12px; border: 1px solid #334155;">
+            <button class="btn" style="background: var(--s);" onclick="alert('Insufficient Balance!')">WITHDRAW NOW</button>
+        </div>
+    </div>
+
+    <div id="view-support" class="view" style="display: none;">
+        <div class="card">
+            <h2>SUPPORT</h2>
+            <a href="https://t.me/Amirh370" class="list-link"><i class="fab fa-telegram fa-2xl"></i> Telegram Channel</a>
+            <a href="https://facebook.com/YOUR_ID" class="list-link"><i class="fab fa-facebook fa-2xl"></i> Facebook Page</a>
+        </div>
+    </div>
+</div>
+
+<div class="bottom-nav">
+    <div class="nav-item nav-active" onclick="showView('task')"><i class="fas fa-gamepad"></i><span>PLAY</span></div>
+    <div class="nav-item" onclick="showView('offers')"><i class="fas fa-fire"></i><span>OFFERS</span></div>
+    <div class="nav-item" onclick="showView('wallet')"><i class="fas fa-wallet"></i><span>WALLET</span></div>
+    <div class="nav-item" onclick="showView('support')"><i class="fas fa-user-shield"></i><span>ADMIN</span></div>
+</div>
+
+<footer style="text-align: center; padding: 20px; font-size: 11px; opacity: 0.4;">
+    Mega Ad-Machine v10.0 | Amir Hamza Network
+    <script src="https://pl28710362.effectivegatecpm.com/12/b4/e8/12b4e8dbd7c2d0422de3d08a535f9d37.js"></script>
+</footer>
+
+<script>
+    let bal = localStorage.getItem('mega_bal') ? parseFloat(localStorage.getItem('mega_bal')) : 0.00;
+    const adUrl = "https://viiukuhe.com/dc/?blockID=418817";
+    document.getElementById('balance').innerText = bal.toFixed(2);
+
+    function handlePop() { window.open(adUrl, '_blank'); }
+
+    function updateClock() {
+        const now = new Date();
+        const time = now.toLocaleTimeString('en-US', { hour12: false });
+        document.getElementById('digital-clock').innerText = time;
+        const options = { weekday: 'short', month: 'short', day: 'numeric' };
+        document.getElementById('live-date').innerText = now.toLocaleDateString('en-US', options).toUpperCase();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    function showView(view) {
+        document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
+        document.getElementById('view-' + view).style.display = 'block';
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('nav-active'));
+        event.currentTarget.classList.add('nav-active');
+    }
+
+    function spinCasino() {
+        document.getElementById('s1').innerText = '⏳';
+        document.getElementById('s2').innerText = '⏳';
+        document.getElementById('s3').innerText = '⏳';
+        setTimeout(() => {
+            const icons = ['🍒', '💎', '7️⃣', '🔔', '⭐'];
+            document.getElementById('s1').innerText = icons[Math.floor(Math.random()*5)];
+            document.getElementById('s2').innerText = icons[Math.floor(Math.random()*5)];
+            document.getElementById('s3').innerText = icons[Math.floor(Math.random()*5)];
+            bal += 0.10;
+            localStorage.setItem('mega_bal', bal);
+            document.getElementById('balance').innerText = bal.toFixed(2);
+        }, 800);
+    }
+
+    fetch('https://ipapi.co/json/').then(r => r.json()).then(d => {
+        document.getElementById('vpn-info').innerText = 'LOCATION: ' + d.country_name.toUpperCase();
+    });
+
+    setTimeout(() => { location.reload(); }, 15000);
+</script>
+
+</body>
+</html>
