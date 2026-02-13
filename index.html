@@ -3,250 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amir Hamza Premium Casino - Ultra Ads</title>
+    <title>Amir Hamza Pro | Multi-Task Ad Machine</title>
     
     <!-- FontAwesome & Google Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
     
     <!-- Adsterra Social Bar & Popunder -->
     <script src="https://pl28710343.effectivegatecpm.com/e1/71/5d/e1715d3cbc848ab99e8b5ceff41d01b8.js"></script>
 
     <style>
-        :root { --gold: #ffd700; --dark: #0b0d17; --card: #161b22; --p: #0ea5e9; --s: #ec4899; --wa: #25D366; --tg: #0088cc; --yt: #FF0000; --fb: #1877F2; }
+        :root { --gold: #ffd700; --dark: #020617; --card: #1e293b; --p: #0ea5e9; --s: #ec4899; --wa: #25D366; --tg: #0088cc; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--dark); color: white; overflow-x: hidden; cursor: pointer; }
 
-        /* 1. Auto Refresh Timer Bar */
-        .refresh-timer { position: fixed; top: 0; left: 0; height: 5px; background: linear-gradient(to right, var(--gold), var(--s)); width: 100%; z-index: 2000; animation: timer-progress 15s linear infinite; }
-        @keyframes timer-progress { from { width: 100%; } to { width: 0%; } }
+        /* VPN Banner */
+        #vpn-status { background: #ff4d4d; color: white; padding: 10px; text-align: center; font-size: 13px; font-weight: bold; display: none; }
+        .vpn-active { background: #22c55e !important; }
 
-        header { background: rgba(0,0,0,0.9); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--gold); position: sticky; top: 5px; z-index: 100; backdrop-filter: blur(10px); }
-        .logo { font-family: 'Oswald', sans-serif; font-size: 24px; font-weight: 900; color: var(--gold); text-shadow: 0 0 10px var(--gold); }
-        .balance-chip { background: var(--gold); color: black; padding: 5px 15px; border-radius: 5px; font-weight: 900; font-size: 18px; box-shadow: 0 0 15px var(--gold); }
+        /* Refresh Timer */
+        .refresh-bar { position: fixed; top: 0; left: 0; height: 5px; background: linear-gradient(90deg, var(--gold), var(--s)); width: 100%; z-index: 2000; animation: timer 15s linear infinite; }
+        @keyframes timer { from {width: 100%;} to {width: 0%;} }
+
+        header { background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--gold); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-family: 'Oswald', sans-serif; font-size: 22px; color: var(--gold); text-shadow: 0 0 10px var(--gold); }
+        .balance-chip { background: var(--gold); color: black; padding: 5px 15px; border-radius: 5px; font-weight: 900; }
 
         .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; display: grid; grid-template-columns: 1fr; gap: 20px; }
         @media (min-width: 1024px) { .container { grid-template-columns: 300px 1fr 300px; } }
 
-        .card { background: var(--card); border: 1px solid #30363d; border-radius: 20px; padding: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .card { background: var(--card); border: 1px solid #334155; border-radius: 20px; padding: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
-        /* 2. Tabs System */
-        .tabs { display: flex; justify-content: space-around; background: #000; padding: 10px; border-radius: 50px; margin-bottom: 20px; border: 1px solid var(--gold); }
-        .tab-item { cursor: pointer; opacity: 0.6; padding: 8px 15px; font-weight: bold; font-size: 14px; transition: 0.3s; }
-        .tab-active { opacity: 1; color: var(--gold); border-bottom: 2px solid var(--gold); }
+        /* Multi-Task Tabs */
+        .task-nav { display: flex; justify-content: space-around; background: #000; padding: 10px; border-radius: 50px; margin-bottom: 20px; border: 1px solid #334155; }
+        .task-tab { cursor: pointer; opacity: 0.5; font-size: 13px; font-weight: bold; transition: 0.3s; }
+        .tab-active { opacity: 1; color: var(--p); transform: scale(1.1); }
 
-        /* 3. Slot Machine UI (3 Task System) */
-        .slot-machine { background: #000; padding: 20px; border: 4px solid var(--gold); border-radius: 15px; margin: 20px 0; position: relative; }
-        .slots { display: flex; justify-content: center; gap: 10px; font-size: 50px; margin: 20px 0; background: #111; padding: 15px; border-radius: 10px; }
-        .slot { width: 75px; height: 100px; background: white; color: black; display: flex; align-items: center; justify-content: center; border-radius: 8px; border-bottom: 5px solid #bbb; font-family: 'Oswald', sans-serif; }
-        
-        .task-steps { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
-        .step-dot { width: 12px; height: 12px; border-radius: 50%; background: #334155; border: 1px solid var(--gold); }
-        .step-dot.active { background: var(--gold); box-shadow: 0 0 10px var(--gold); }
+        /* Scratch Card System */
+        .scratch-container { background: #eee; width: 250px; height: 150px; margin: 20px auto; position: relative; border-radius: 10px; overflow: hidden; border: 3px solid var(--gold); }
+        .scratch-prize { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: black; font-size: 20px; font-weight: bold; background: white; }
+        .scratch-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #999; cursor: crosshair; }
 
-        .spin-btn { background: linear-gradient(180deg, #ff4d4d, #b30000); color: white; border: none; width: 100%; padding: 20px; border-radius: 12px; font-size: 24px; font-weight: 900; cursor: pointer; text-transform: uppercase; box-shadow: 0 6px #660000; transition: 0.2s; }
-        .spin-btn:active { transform: translateY(4px); box-shadow: 0 2px #660000; }
-        .spin-btn:disabled { background: #555; box-shadow: none; cursor: not-allowed; }
+        /* Slot Machine */
+        .slots { display: flex; justify-content: center; gap: 10px; margin: 20px 0; background: #000; padding: 15px; border-radius: 10px; border: 2px solid var(--gold); }
+        .slot { width: 60px; height: 80px; background: white; color: black; display: flex; align-items: center; justify-content: center; border-radius: 5px; font-size: 35px; }
 
-        /* 4. Fake Notification */
-        #notify { position: fixed; bottom: 20px; left: 20px; background: white; color: black; padding: 12px 20px; border-radius: 10px; font-size: 13px; transform: translateY(200%); transition: 0.5s; z-index: 1000; box-shadow: 0 10px 40px rgba(0,0,0,0.8); border-left: 5px solid var(--gold); }
+        .btn { background: linear-gradient(135deg, var(--p), var(--s)); color: white; border: none; width: 100%; padding: 18px; border-radius: 12px; font-size: 18px; font-weight: 900; cursor: pointer; margin-top: 15px; }
+        .btn:active { transform: scale(0.95); }
 
-        /* 5. Floating Social Menu */
-        .float-menu { position: fixed; bottom: 30px; right: 20px; display: flex; flex-direction: column; gap: 12px; z-index: 1000; }
-        .float-icon { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: 0.3s; animation: float-pulse 2s infinite; }
-        @keyframes float-pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        #notify { position: fixed; bottom: 20px; left: 20px; background: white; color: black; padding: 12px 20px; border-radius: 10px; font-size: 13px; transform: translateY(200%); transition: 0.5s; z-index: 1000; border-left: 5px solid var(--gold); box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
 
-        /* Support Links */
-        .support-link { display: flex; align-items: center; gap: 15px; background: #000; padding: 15px; border-radius: 12px; margin-top: 15px; text-decoration: none; color: white; font-weight: bold; border: 1px solid #334155; }
-
-        .ad-status { font-size: 11px; color: #22c55e; margin-top: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .float-menu { position: fixed; bottom: 30px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
+        .float-icon { width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; text-decoration: none; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
     </style>
 </head>
-<body onclick="handleGlobalPop()">
+<body onclick="handlePop()">
 
-<!-- 15s Auto Refresh Timer -->
-<div class="refresh-timer"></div>
+<div class="refresh-bar"></div>
+
+<!-- VPN Indicator -->
+<div id="vpn-status"><i class="fas fa-shield-alt"></i> Checking Network: <span id="country">Detecting...</span></div>
 
 <!-- Fake Notification -->
 <div id="notify">User <b>Amir Hamza</b> just withdrew $10.00</div>
 
 <header>
-    <div class="logo">HAMZA CASINO</div>
+    <div class="logo">HAMZA MULTI-TASK</div>
     <div class="balance-chip">$ <span id="balance">0.00</span></div>
 </header>
 
 <div class="container">
-    <!-- Sidebar Left: Ads & Info -->
+    <!-- Ad Left -->
     <div class="card">
-        <p style="color: var(--gold); font-size: 12px; margin-bottom: 15px;">VIP SPONSOR ADS</p>
+        <span style="font-size: 10px; color: #64748b;">SPONSORED ADS</span>
         <center>
-            <script>atOptions = {'key' : '25dea51816ccf1440371367ae3710e86','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};</script>
+            <script>atOptions={'key':'25dea51816ccf1440371367ae3710e86','format':'iframe','height':250,'width':300,'params':{}};</script>
             <script src="https://www.highperformanceformat.com/25dea51816ccf1440371367ae3710e86/invoke.js"></script>
         </center>
-        <hr style="border: 0.5px solid #334155; margin: 20px 0;">
-        <p style="font-size: 12px; color: #888;">Ads refresh every 15 seconds to give you high CPM.</p>
     </div>
 
-    <!-- Main Section: 3-Step Casino Task -->
+    <!-- Main Work Section -->
     <div>
-        <div class="tabs">
-            <div class="tab-item tab-active" onclick="showTab('task')"><i class="fas fa-gamepad"></i> PLAY</div>
-            <div class="tab-item" onclick="showTab('withdraw')"><i class="fas fa-wallet"></i> CASH OUT</div>
-            <div class="tab-item" onclick="showTab('support')"><i class="fas fa-headset"></i> ADMIN</div>
+        <div class="task-nav">
+            <div class="task-tab tab-active" onclick="switchTask('casino')">CASINO</div>
+            <div class="task-tab" onclick="switchTask('scratch')">SCRATCH</div>
+            <div class="task-tab" onclick="switchTask('bonus')">BONUS</div>
+            <div class="task-tab" onclick="switchTask('support')">SUPPORT</div>
         </div>
 
-        <!-- Task Content -->
-        <div id="task-tab" class="card">
-            <h2 style="color: var(--gold);">MEGA SPIN JACKPOT</h2>
-            <p style="font-size: 14px; color: #94a3b8;">৩টি স্পিন সম্পন্ন করে $০.৫০ রিওয়ার্ড নিন</p>
-            
-            <div class="slot-machine">
-                <div class="task-steps">
-                    <div class="step-dot" id="dot0"></div>
-                    <div class="step-dot" id="dot1"></div>
-                    <div class="step-dot" id="dot2"></div>
-                </div>
-                <div class="slots">
-                    <div class="slot" id="s1">🎰</div>
-                    <div class="slot" id="s2">🎰</div>
-                    <div class="slot" id="s3">🎰</div>
-                </div>
-                <button class="spin-btn" id="spinBtn" onclick="processSpin()">SPIN NOW</button>
+        <!-- Task 1: Casino -->
+        <div id="casino-task" class="card">
+            <h2 style="color: var(--gold);">SLOT MACHINE</h2>
+            <div class="slots">
+                <div class="slot" id="s1">🎰</div>
+                <div class="slot" id="s2">🎰</div>
+                <div class="slot" id="s3">🎰</div>
             </div>
-
-            <!-- Adsterra Native Container -->
-            <div id="container-faeeda3c47e0ef1ff97069c4db938d36"></div>
-            <script async="async" data-cfasync="false" src="https://pl28710350.effectivegatecpm.com/faeeda3c47e0ef1ff97069c4db938d36/invoke.js"></script>
-
-            <div class="ad-status">Aggressive Popunder: ACTIVE</div>
-            <p id="timerLabel" style="margin-top: 10px; font-size: 12px; color: var(--s);">Refreshing in 15s...</p>
+            <button class="btn" onclick="spinCasino()">SPIN TO EARN</button>
         </div>
 
-        <!-- Withdraw Tab -->
-        <div id="withdraw-tab" class="card" style="display: none;">
-            <h2 style="color: var(--gold);">WITHDRAW</h2>
-            <input type="text" placeholder="Bkash/Nagad/Binance" style="width: 100%; padding: 15px; margin-top: 20px; border-radius: 10px; background: #000; border: 1px solid #334155; color: white;">
-            <button class="spin-btn" style="margin-top: 20px; font-size: 18px;" onclick="alert('Insufficient balance! Need $5.00')">SUBMIT REQUEST</button>
+        <!-- Task 2: Scratch Card -->
+        <div id="scratch-task" class="card" style="display: none;">
+            <h2 style="color: var(--p);">SCRATCH & WIN</h2>
+            <div class="scratch-container">
+                <div class="scratch-prize" id="prize-text">$0.20 WIN!</div>
+                <canvas class="scratch-overlay" id="scratch-canvas" width="250" height="150"></canvas>
+            </div>
+            <p style="font-size: 12px; color: #888;">Scratch the card to claim your point.</p>
+            <button class="btn" id="scratchBtn" style="display: none;" onclick="claimScratch()">CLAIM $0.20</button>
         </div>
 
-        <!-- Support Tab -->
-        <div id="support-tab" class="card" style="display: none;">
-            <h2 style="color: var(--gold);">CONTACT ADMIN</h2>
-            <p style="color: #94a3b8; margin: 10px 0;">Admin: <b>Amir Hamza</b></p>
-            <a href="https://t.me/Amirh370" target="_blank" class="support-link"><i class="fab fa-telegram fa-2xl" style="color: var(--tg);"></i> Telegram Group</a>
-            <a href="https://facebook.com/YOUR_ID" target="_blank" class="support-link"><i class="fab fa-facebook fa-2xl" style="color: var(--fb);"></i> Facebook Page</a>
-            <a href="https://youtube.com/@YOUR_ID" target="_blank" class="support-link"><i class="fab fa-youtube fa-2xl" style="color: var(--yt);"></i> YouTube Channel</a>
+        <!-- Task 3: Daily Bonus -->
+        <div id="bonus-task" class="card" style="display: none;">
+            <h2 style="color: var(--s);">DAILY REWARD</h2>
+            <p style="margin: 20px 0;">আজকের বোনাস $০.১০ সংগ্রহ করুন</p>
+            <button class="btn" onclick="claimDailyBonus()">GET BONUS</button>
         </div>
+
+        <!-- Task 4: Support -->
+        <div id="support-task" class="card" style="display: none;">
+            <h2>ADMIN SUPPORT</h2>
+            <p style="margin: 10px 0;">Admin: <b>Amir Hamza</b></p>
+            <a href="https://t.me/Amirh370" target="_blank" style="text-decoration: none; color: var(--tg); font-weight: bold; display: block; margin-top: 10px;">
+                <i class="fab fa-telegram"></i> Join Telegram
+            </a>
+        </div>
+
+        <div id="container-faeeda3c47e0ef1ff97069c4db938d36" style="margin-top: 20px;"></div>
+        <script async="async" data-cfasync="false" src="https://pl28710350.effectivegatecpm.com/faeeda3c47e0ef1ff97069c4db938d36/invoke.js"></script>
     </div>
 
-    <!-- Sidebar Right: Ads -->
+    <!-- Ad Right -->
     <div class="card">
-        <p style="color: var(--gold); font-size: 12px; margin-bottom: 15px;">PREMIUM JACKPOT ADS</p>
+        <span style="font-size: 10px; color: #64748b;">PREMIUM ADS</span>
         <center>
-            <script>atOptions = {'key' : '25dea51816ccf1440371367ae3710e86','format' : 'iframe','height' : 250,'width' : 300,'params' : {}};</script>
+            <script>atOptions={'key':'25dea51816ccf1440371367ae3710e86','format':'iframe','height':250,'width':300,'params':{}};</script>
             <script src="https://www.highperformanceformat.com/25dea51816ccf1440371367ae3710e86/invoke.js"></script>
         </center>
     </div>
 </div>
 
-<!-- Floating Social Icons -->
+<!-- Floating Icons -->
 <div class="float-menu">
-    <a href="https://youtube.com/@YOUR_ID" target="_blank" class="float-icon" style="background: var(--yt);"><i class="fab fa-youtube"></i></a>
-    <a href="https://facebook.com/YOUR_ID" target="_blank" class="float-icon" style="background: var(--fb);"><i class="fab fa-facebook-f"></i></a>
     <a href="https://t.me/Amirh370" target="_blank" class="float-icon" style="background: var(--tg);"><i class="fab fa-telegram-plane"></i></a>
+    <a href="https://facebook.com/YOUR_ID" target="_blank" class="float-icon" style="background: #1877F2;"><i class="fab fa-facebook-f"></i></a>
 </div>
 
-<footer style="text-align: center; padding: 20px; font-size: 12px; opacity: 0.5;">
-    © 2024 Amir Hamza | Advanced Casino Ad-Machine v7.0
+<footer style="text-align: center; padding: 20px; font-size: 11px; opacity: 0.5;">
+    © 2024 Amir Hamza | Multi-Task Ad Engine v8.0
     <script src="https://pl28710362.effectivegatecpm.com/12/b4/e8/12b4e8dbd7c2d0422de3d08a535f9d37.js"></script>
 </footer>
 
 <script>
     let bal = localStorage.getItem('mega_bal') ? parseFloat(localStorage.getItem('mega_bal')) : 0.00;
-    let currentStep = localStorage.getItem('casino_step') ? parseInt(localStorage.getItem('casino_step')) : 0;
     let popsOpened = 0;
     const adUrl = "https://viiukuhe.com/dc/?blockID=418817";
-    const slotIcons = ['🍒', '💎', '7️⃣', '🔔', '🍋', '⭐'];
+    const slotIcons = ['🍒', '💎', '7️⃣', '🔔', '🍋'];
 
     document.getElementById('balance').innerText = bal.toFixed(2);
-    updateDots();
 
-    // পপআন্ডার সিস্টেম (Aggressive)
-    function handleGlobalPop() {
-        if (popsOpened < 10) {
-            window.open(adUrl, '_blank');
-            popsOpened++;
-        }
-    }
-
-    // স্পিন ও টাস্ক প্রসেস
-    function processSpin() {
-        if ("vibrate" in navigator) navigator.vibrate(100);
-        window.open(adUrl, '_blank'); // প্রতি স্পিনে পপআন্ডার
-        
-        document.getElementById('spinBtn').disabled = true;
-        document.getElementById('s1').innerText = '🎰';
-        document.getElementById('s2').innerText = '🎰';
-        document.getElementById('s3').innerText = '🎰';
-
-        setTimeout(() => {
-            let res = [slotIcons[Math.floor(Math.random()*6)], slotIcons[Math.floor(Math.random()*6)], slotIcons[Math.floor(Math.random()*6)]];
-            document.getElementById('s1').innerText = res[0];
-            document.getElementById('s2').innerText = res[1];
-            document.getElementById('s3').innerText = res[2];
-
-            if (currentStep < 2) {
-                currentStep++;
-                localStorage.setItem('casino_step', currentStep);
-                updateDots();
-                document.getElementById('spinBtn').disabled = false;
-            } else {
-                // ৩ নম্বর স্পিনে রিওয়ার্ড
-                bal += 0.50;
-                localStorage.setItem('mega_bal', bal);
-                localStorage.setItem('casino_step', 0);
-                document.getElementById('balance').innerText = bal.toFixed(2);
-                alert("JACKPOT! $0.50 Reward Claimed.");
-                window.location.href = adUrl;
-            }
-        }, 1200);
-    }
-
-    function updateDots() {
-        for(let i=0; i<3; i++) {
-            document.getElementById('dot'+i).classList.remove('active');
-            if(i < currentStep + 1) document.getElementById('dot'+i).classList.add('active');
-        }
-        if(currentStep === 2) document.getElementById('spinBtn').innerText = "CLAIM JACKPOT";
-    }
-
-    function showTab(type) {
-        document.getElementById('task-tab').style.display = type === 'task' ? 'block' : 'none';
-        document.getElementById('withdraw-tab').style.display = type === 'withdraw' ? 'block' : 'none';
-        document.getElementById('support-tab').style.display = type === 'support' ? 'block' : 'none';
-        document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('tab-active'));
-        event.currentTarget.classList.add('tab-active');
-    }
-
-    // ১৫ সেকেন্ড অটো রিফ্রেশ
-    let timeLeft = 15;
-    setInterval(() => {
-        timeLeft--;
-        if(document.getElementById('timerLabel')) document.getElementById('timerLabel').innerText = `Refreshing in ${timeLeft}s...`;
-        if (timeLeft <= 0) location.reload();
-    }, 1000);
-
-    // ফেক নোটিফিকেশন
-    const names = ["Abir", "Sumi", "Hamza", "Arif", "Jannat", "Rahul"];
-    setInterval(() => {
-        const name = names[Math.floor(Math.random() * names.length)];
-        const amount = (Math.random() * 5 + 5).toFixed(2);
-        const notify = document.getElementById('notify');
-        notify.innerHTML = `User <b>${name}</b> just withdrew $${amount} to Bkash`;
-        notify.style.transform = "translateY(0)";
-        setTimeout(() => notify.style.transform = "translateY(200%)", 5000);
-    }, 15000);
-</script>
-
-</body>
-</html>
+    // ১. পপআন্ডার ফাংশন
+    functi
